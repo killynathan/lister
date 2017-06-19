@@ -8,7 +8,6 @@ import AddButton from '../components/addButton';
 export default class ListScreen extends React.Component {
 	constructor(props) {
 		super(props);
-		var i = 0;
 		this.state = {
 			isModalActive: false,
 			newListItem: ''
@@ -19,10 +18,12 @@ export default class ListScreen extends React.Component {
 
 	render() {
 		const { params } = this.props.navigation.state;
-		var {listName, listItems} = params;
+		var {listName, listItems, deleteItem} = params;
+		var i = -1;
 
 		var renderedListItems = listItems.map((elem) => {
-	      return <ListItem itemName={elem} key={i++} />
+			i++;
+	      return <ListItem listName={listName} itemName={elem} key={i} index={i} deleteItem={deleteItem}/>
 	    });
 
 		return (

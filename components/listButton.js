@@ -12,18 +12,27 @@ export default class ListButton extends React.Component {
 			
 		};
 		navigate = props.navigate;
+		deleteList = props.deleteList;
 	}
+
 
 	render() {
 		var title = this.props.text;
 		var listItems = this.props.listItems;
+
+		var _deleteList = () => {
+			deleteList(title);
+		}
+		var {deleteItem} = this.props;
+
 		return (
 			<View style={styles.container}>
 				<TouchableOpacity 
 					style={styles.button} 
 					onPress={()=>navigate('ListScreen', {
 						listName: title,
-						listItems: listItems
+						listItems: listItems,
+						deleteItem: deleteItem
 					})}
 				>
 					<Text style={styles.title}>{title}</Text>
@@ -31,7 +40,7 @@ export default class ListButton extends React.Component {
 
 				<TouchableHighlight
 					style={styles.deleteButton}
-					onPress={()=>{}}
+					onPress={_deleteList}
 				>
 					<Text>-</Text>
 				</TouchableHighlight>

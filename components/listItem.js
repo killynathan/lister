@@ -11,7 +11,14 @@ export default class ListItem extends React.Component {
 	}
 
 	render() {
+		var listName = this.props.listName;
 		var itemName = this.props.itemName;
+		var index = this.props.index;
+		var deleteItem = this.props.deleteItem;
+		var _deleteItem = ()=>{
+			deleteItem(listName, index);
+		};
+
 		return (
 			<View style={styles.container}>
 				<TouchableOpacity 
@@ -23,7 +30,7 @@ export default class ListItem extends React.Component {
 
 				<TouchableOpacity
 					style={styles.deleteButton}
-					onPress={()=>{}}
+					onPress={_deleteItem}
 				>
 					<Text>-</Text>
 				</TouchableOpacity>

@@ -8,6 +8,7 @@ import { StackNavigator } from 'react-navigation';
 import Header from '../components/header';
 import SubHeader from '../components/subHeader';
 import AddButton from '../components/addButton';
+import AddModal from '../components/addModal';
 
 export default class ListsScreen extends React.Component {
   constructor(props) {
@@ -18,6 +19,11 @@ export default class ListsScreen extends React.Component {
       lists: {'first thing': ['a', 'b', 'c'], 'second thing': ['hey', 'woo'], 'third thing!': ['gettt']}
     };
     i = 0;
+    this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
+    this.handleTextChange = this.handleTextChange.bind(this);
+    this.deleteList = this.deleteList.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
   }
 
   _showModal = () => this.setState({isModalVisible: true})
@@ -41,11 +47,26 @@ export default class ListsScreen extends React.Component {
     this.hideModal();
   }
 
-  _handleTextChange = (text) => this.setState({newTitle: text})
+  handleTextChange = (text) => this.setState({newTitle: text})
 
   addList(listName) {
     
     this.state.lists[listName] = ['test'];
+    this.setState({
+      lists: this.state.lists
+    });
+  }
+
+  deleteList = (listName) => {
+    delete this.state.lists[listName];
+    this.setState({
+      lists: this.state.lists
+    });
+  }
+
+  deleteItem = (listName, itemIndex) => {
+    console.log(listName, itemIndex);
+    this.state.lists[listName].splice(itemIndex, 1);
     this.setState({
       lists: this.state.lists
     });
@@ -58,33 +79,18 @@ export default class ListsScreen extends React.Component {
     
     var list_names = Object.keys(this.state.lists);
     var rendered_lists = list_names.map((elem) => {
-      return <ListButton text={elem} key={i++} navigate={navigate} listItems={this.state.lists[elem]}/>
+      return <ListButton text={elem} key={i++} navigate={navigate} listItems={this.state.lists[elem]} deleteList={this.deleteList} deleteItem={this.deleteItem}/>
     });
 
     return (
       <View style={styles.container}>
 
-        <Modal isVisible={this.state.isModalVisible}>
-          <View style={styles.newListModal}>
-
-            <TextInput 
-              style={styles.input}
-              placeholder='list name'
-              underlineColorAndroid='transparent'
-              onChangeText={this._handleTextChange}
-            />
-
-            <View style={styles.buttonsContainer}>
-              <TouchableOpacity style={styles.button} onPress={this.handleCancel}>
-                <Text style={styles.buttonText}>Cancel</Text>
-              </TouchableOpacity>
-
-              <TouchableOpacity style={styles.button} onPress={this.handleSubmit}>
-                <Text style={styles.buttonText}>Submit</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </Modal>
+        <AddModal 
+          isVisible = {this.state.isModalVisible}
+          handleTextChange = {this.handleTextChange}
+          handleCancel = {this.handleCancel}
+          handleSubmit = {this.handleSubmit}
+          />
 
         <Header />
 
@@ -116,44 +122,6 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 20,
     right: 20
-  },
-
-  input: {
-    alignSelf: 'stretch',
-    backgroundColor: 'pink',
-    padding: 10,
-    fontSize: 20,
-    marginBottom: 15
-  },
-
-  newListModal: {
-    backgroundColor: 'white',
-    padding: 22,
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderRadius: 4,
-    borderColor: 'rgba(0, 0, 0, 0.1)',
-  },
-
-  buttonsContainer: {
-    alignSelf: 'stretch',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-
-  button: {
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: 'lightgrey'
-  },
-
-  buttonText: {
-    fontSize: 15,
-    padding: 10
-  },
-
-  cancelButton: {
-
   }
 });
 
