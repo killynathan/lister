@@ -1,6 +1,5 @@
 import React from 'react';
 import { StyleSheet, Text, View, TextInput, ScrollView, TouchableOpacity, TouchableNativeFeedback, Button } from 'react-native';
-import Modal from 'react-native-modal';
 import ListButton from '../components/listButton';
 
 import { StackNavigator } from 'react-navigation';
@@ -24,16 +23,19 @@ export default class ListsScreen extends React.Component {
     this.handleTextChange = this.handleTextChange.bind(this);
     this.deleteList = this.deleteList.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
+
+    updateLists = props.screenProps.updateLists;
+    lists = props.screenProps.lists;
   }
 
-  _showModal = () => this.setState({isModalVisible: true})
+  showModal = () => this.setState({isModalVisible: true})
 
   hideModal = () => this.setState({isModalVisible: false})
 
   clearNewTitle = () => this.setState({newTitle: ''})
 
   handleAddButtonPress = () => {
-    this._showModal();
+    this.showModal();
   }
 
   handleSubmit = () => {
@@ -51,21 +53,16 @@ export default class ListsScreen extends React.Component {
 
   addList(listName) {
     
-    this.state.lists[listName] = ['test'];
-    this.setState({
-      lists: this.state.lists
-    });
+    lists[listName] = ['test'];
+    updateLists(lists);
   }
 
   deleteList = (listName) => {
-    delete this.state.lists[listName];
-    this.setState({
-      lists: this.state.lists
-    });
+    delete lists[listName];
+    updateLists(lists);
   }
 
   deleteItem = (listName, itemIndex) => {
-    console.log(listName, itemIndex);
     this.state.lists[listName].splice(itemIndex, 1);
     this.setState({
       lists: this.state.lists
@@ -75,11 +72,10 @@ export default class ListsScreen extends React.Component {
   render() {
 
     const { navigate } = this.props.navigation;
-
     
-    var list_names = Object.keys(this.state.lists);
+    var list_names = Object.keys(lists);
     var rendered_lists = list_names.map((elem) => {
-      return <ListButton text={elem} key={i++} navigate={navigate} listItems={this.state.lists[elem]} deleteList={this.deleteList} deleteItem={this.deleteItem}/>
+      return <ListButton text={elem} key={i++} navigate={navigate} deleteItem={this.deleteItem}/>
     });
 
     return (
@@ -109,7 +105,8 @@ export default class ListsScreen extends React.Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 24
+    marginTop: 24,
+    backgroundColor: '#dbe1e7'
   },
 
   addButton: {

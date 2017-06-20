@@ -21,6 +21,7 @@ export default class ListItem extends React.Component {
 
 		return (
 			<View style={styles.container}>
+				<View style={{height: 20, width: 20, backgroundColor: 'red'}}></View>
 				<TouchableOpacity 
 					style={styles.button} 
 					onPress={()=>{}}
@@ -46,11 +47,14 @@ const styles = StyleSheet.create({
 		borderBottomColor: 'black',
 		height: 60,
 		flexDirection: 'row',
-		alignItems: 'center'
+		alignItems: 'center',
 	},
 
 	button: {
 		flex: 1,
+		alignSelf: 'stretch',
+		justifyContent: 'center',
+		backgroundColor: 'pink',
 	},
 
 	title: {

@@ -30,9 +30,7 @@ export default class ListButton extends React.Component {
 				<TouchableOpacity 
 					style={styles.button} 
 					onPress={()=>navigate('ListScreen', {
-						listName: title,
-						listItems: listItems,
-						deleteItem: deleteItem
+						listName: title
 					})}
 				>
 					<Text style={styles.title}>{title}</Text>
@@ -61,7 +59,8 @@ const styles = StyleSheet.create({
 
 	button: {
 		flex: 1,
-		backgroundColor: 'pink'
+		alignSelf: 'stretch',
+		justifyContent: 'center',
 	},
 
 	title: {
