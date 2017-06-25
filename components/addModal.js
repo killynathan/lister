@@ -9,7 +9,7 @@ export default AddModal = ( {isVisible, handleTextChange, handleCancel, handleSu
 
             <TextInput 
               style={styles.input}
-              placeholder='list name'
+              placeholder='name'
               underlineColorAndroid='transparent'
               onChangeText={handleTextChange}
             />
@@ -20,7 +20,7 @@ export default AddModal = ( {isVisible, handleTextChange, handleCancel, handleSu
               </TouchableOpacity>
 
               <TouchableOpacity style={styles.button} onPress={handleSubmit}>
-                <Text style={styles.buttonText}>Submit</Text>
+                <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -39,10 +39,11 @@ const styles = StyleSheet.create({
   },
   input: {
     alignSelf: 'stretch',
-    backgroundColor: 'pink',
     padding: 10,
     fontSize: 20,
-    marginBottom: 15
+    marginBottom: 25,
+    borderRadius: 5,
+    borderWidth: 1,
   },
   buttonsContainer: {
     alignSelf: 'stretch',
@@ -51,14 +52,14 @@ const styles = StyleSheet.create({
   },
 
   button: {
-    borderWidth: 2,
-    borderRadius: 10,
-    backgroundColor: 'lightgrey'
+    borderRadius: 5,
+    backgroundColor: '#bf7fbf'
   },
 
   buttonText: {
     fontSize: 15,
-    padding: 10
+    padding: 10,
+    color: 'white'
   },
 
  });

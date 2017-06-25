@@ -1,13 +1,20 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class ListItem extends React.Component {
 
 	constructor(props) {
 		super(props);
 		this.state = {
-			
+			completed: false
 		};
+	}
+
+	markItem = () => {
+		this.setState({
+			completed: !this.state.completed
+		});
 	}
 
 	render() {
@@ -21,20 +28,18 @@ export default class ListItem extends React.Component {
 
 		return (
 			<View style={styles.container}>
-				<View style={{height: 20, width: 20, backgroundColor: 'red'}}></View>
+
+				{!this.state.completed && <Icon name="ios-square-outline" size={25} color="black" style={styles.checkbox}/> }
+				{this.state.completed && <Icon name="ios-checkbox-outline" size={25} color="black" style={styles.checkbox}/> }
+
 				<TouchableOpacity 
 					style={styles.button} 
-					onPress={()=>{}}
+					onPress={this.markItem}
 				>
 					<Text style={styles.title}>{itemName}</Text>
 				</TouchableOpacity>
 
-				<TouchableOpacity
-					style={styles.deleteButton}
-					onPress={_deleteItem}
-				>
-					<Text>-</Text>
-				</TouchableOpacity>
+				<Icon name="ios-close-circle-outline" size={29} onPress={_deleteItem} style={{marginRight: 15}}/>
 			</View>
 		)
 	}
@@ -43,34 +48,36 @@ export default class ListItem extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		borderBottomWidth: 2,
-		borderBottomColor: 'black',
+		borderBottomWidth: 1,
+		borderBottomColor: '#d8d8d8',
 		height: 60,
 		flexDirection: 'row',
-		alignItems: 'center',
+		alignItems: 'center'
 	},
 
 	button: {
 		flex: 1,
 		alignSelf: 'stretch',
-		justifyContent: 'center',
-		backgroundColor: 'pink',
+		justifyContent: 'center'
 	},
 
 	title: {
 		fontSize: 20,
-		marginLeft: 20,
-		color: 'black'
+		marginLeft: 10,
+		color: '#303030'
 	},
 
 	deleteButton: {
-		borderRadius: 50,
-		height: 25,
-		width: 25,
-		backgroundColor: 'skyblue',
+		height: 40,
+		width: 20,
+		backgroundColor: '#bbc3cc',
 		alignItems: 'center',
     	justifyContent: 'center',
     	position: 'absolute',
-    	right: 20
+    	right: 15
+	},
+
+	checkbox: {
+		marginLeft: 15
 	}
 });

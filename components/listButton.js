@@ -1,5 +1,6 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableHighlight, TouchableOpacity, TouchableNativeFeedback } from 'react-native';
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { StackNavigator } from 'react-navigation';
 
@@ -36,12 +37,14 @@ export default class ListButton extends React.Component {
 					<Text style={styles.title}>{title}</Text>
 				</TouchableOpacity>
 
-				<TouchableHighlight
+				<Icon name="angle-right" size={30} color="black" style={styles.nextIcon}/>
+
+				{/*<TouchableHighlight
 					style={styles.deleteButton}
 					onPress={_deleteList}
 				>
 					<Text>-</Text>
-				</TouchableHighlight>
+				</TouchableHighlight>*/}
 			</View>
 		)
 	}
@@ -50,9 +53,9 @@ export default class ListButton extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		borderBottomWidth: 2,
-		borderBottomColor: 'black',
-		height: 60,
+		borderBottomWidth: 1,
+		borderBottomColor: '#d8d8d8',
+		height: 80,
 		flexDirection: 'row',
 		alignItems: 'center'
 	},
@@ -65,17 +68,22 @@ const styles = StyleSheet.create({
 
 	title: {
 		fontSize: 20,
-		marginLeft: 20
+		marginLeft: 15,
+		color: '#262626'
 	},
 
 	deleteButton: {
-		borderRadius: 50,
-		height: 25,
-		width: 25,
-		backgroundColor: 'skyblue',
+		height: 40,
+		width: 20,
+		backgroundColor: 'powderblue',
 		alignItems: 'center',
     	justifyContent: 'center',
     	position: 'absolute',
-    	right: 20
+    	right: 15
+	},
+
+	nextIcon: {
+		position: 'absolute',
+    	right: 15
 	}
 });

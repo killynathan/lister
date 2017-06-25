@@ -1,24 +1,21 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default AddButton = ({ handlePress }) => {
 	return (
-		<TouchableOpacity 
+		/*<TouchableOpacity 
           style={styles.addButton}
           onPress={handlePress}>
-            <Text>+</Text>
-        </TouchableOpacity>
-	)
+            <Text style={{color: 'white'}}>+</Text>
+        </TouchableOpacity>*/
+
+        <Icon name="ios-add-circle" size={70} style={styles.addButton} color='#8cb3b8' onPress={handlePress}/>
+	);
 }
 
 const styles = StyleSheet.create({
 	addButton: {
-	    backgroundColor: 'powderblue',
-	    height: 60,
-	    width: 60,
-	    borderRadius: 50,
-	    alignItems: 'center',
-	    justifyContent: 'center',
 	    position: 'absolute',
 	    bottom: 20,
 	    right: 20

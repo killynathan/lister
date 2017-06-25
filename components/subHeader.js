@@ -11,14 +11,14 @@ export default SubHeader = ({ text }) => {
 
 const styles = StyleSheet.create({
 	container: {
-		height: 50,
+		height: 40,
 		alignItems: 'center',
 		justifyContent: 'center',
-		backgroundColor: '#494e6b'
+		backgroundColor: '#f9f8ed'
 	},
 
 	text: {
-		color: 'white',
-		fontSize: 20
+		color: 'black',
+		fontSize: 17
 	}
 });

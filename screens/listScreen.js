@@ -76,8 +76,7 @@ export default class ListScreen extends React.Component {
 	          handleSubmit = {_handleSubmit}
 	          />
 
-				<Header />
-				<SubHeader text={listName} />
+				<Header title={listName}/>
 
 				<ScrollView>
 					{renderedListItems}
@@ -91,6 +90,7 @@ export default class ListScreen extends React.Component {
 const styles = StyleSheet.create({
 	container: {
 	    flex: 1,
-	    marginTop: 24
+	    marginTop: 24,
+	    backgroundColor: 'rgb(241, 241, 241)'
 	 },
 })
